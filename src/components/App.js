@@ -75,94 +75,155 @@ function hello() {
   };
 
   return (
-    <div className="app min-h-screen bg-gray-100 p-4">
-      <div className="max-w-7xl mx-auto">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+    <div className="app">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+        <header style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#333', marginBottom: '10px' }}>
             Markdown Editor
           </h1>
-          <p className="text-gray-600">
+          <p style={{ color: '#666' }}>
             Write Markdown on the left, see the live preview on the right
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)]">
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr 1fr', 
+          gap: '20px', 
+          minHeight: '500px' 
+        }}>
           {/* Input Section */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-gray-800 text-white px-4 py-2">
-              <h2 className="text-lg font-semibold">Markdown Input</h2>
+          <div style={{ 
+            backgroundColor: 'white', 
+            borderRadius: '8px', 
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            overflow: 'hidden'
+          }}>
+            <div style={{ 
+              backgroundColor: '#374151', 
+              color: 'white', 
+              padding: '10px 16px' 
+            }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '600', margin: 0 }}>
+                Markdown Input
+              </h2>
             </div>
             <textarea
-              className="w-full h-full p-4 border-none outline-none resize-none font-mono text-sm leading-relaxed"
               value={markdownText}
               onChange={handleInputChange}
               placeholder="Start typing your markdown here..."
-              style={{ minHeight: '500px' }}
+              style={{
+                width: '100%',
+                height: '500px',
+                padding: '16px',
+                border: 'none',
+                outline: 'none',
+                resize: 'none',
+                fontFamily: 'Monaco, Consolas, "Courier New", monospace',
+                fontSize: '14px',
+                lineHeight: '1.5'
+              }}
             />
           </div>
 
           {/* Preview Section */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-blue-600 text-white px-4 py-2 flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Live Preview</h2>
+          <div style={{ 
+            backgroundColor: 'white', 
+            borderRadius: '8px', 
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            overflow: 'hidden'
+          }}>
+            <div style={{ 
+              backgroundColor: '#2563eb', 
+              color: 'white', 
+              padding: '10px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '600', margin: 0 }}>
+                Live Preview
+              </h2>
               {isLoading && (
-                <div className="loading flex items-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
-                  <span className="text-sm">Updating...</span>
+                <div className="loading" style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid white',
+                    borderTop: '2px solid transparent',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    marginRight: '8px'
+                  }}></div>
+                  <span style={{ fontSize: '0.875rem' }}>Updating...</span>
                 </div>
               )}
             </div>
             <div 
-              className="preview p-4 h-full overflow-y-auto prose prose-sm max-w-none"
-              style={{ minHeight: '500px' }}
+              className="preview"
+              style={{
+                padding: '16px',
+                height: '500px',
+                overflowY: 'auto',
+                lineHeight: '1.6'
+              }}
               dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
             />
           </div>
         </div>
 
-        <footer className="mt-8 text-center text-gray-500 text-sm">
+        <footer style={{ 
+          marginTop: '30px', 
+          textAlign: 'center', 
+          color: '#666', 
+          fontSize: '0.875rem' 
+        }}>
           <p>Built with React, useState, and useEffect • Real-time Markdown rendering</p>
         </footer>
       </div>
 
-      <style jsx>{`
-        .prose h1 {
+      <style>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        .preview h1 {
           font-size: 2em;
           font-weight: bold;
           margin: 0.5em 0;
           color: #1f2937;
         }
-        .prose h2 {
+        .preview h2 {
           font-size: 1.5em;
           font-weight: bold;
           margin: 0.5em 0;
           color: #374151;
         }
-        .prose h3 {
+        .preview h3 {
           font-size: 1.25em;
           font-weight: bold;
           margin: 0.5em 0;
           color: #4b5563;
         }
-        .prose p {
+        .preview p {
           margin: 0.5em 0;
-          line-height: 1.6;
         }
-        .prose ul, .prose ol {
+        .preview ul, .preview ol {
           margin: 0.5em 0;
           padding-left: 1.5em;
         }
-        .prose li {
+        .preview li {
           margin: 0.25em 0;
         }
-        .prose code {
+        .preview code {
           background-color: #f3f4f6;
           padding: 0.125em 0.25em;
           border-radius: 0.25em;
           font-family: 'Courier New', monospace;
           font-size: 0.875em;
         }
-        .prose pre {
+        .preview pre {
           background-color: #1f2937;
           color: #f9fafb;
           padding: 1em;
@@ -170,23 +231,29 @@ function hello() {
           overflow-x: auto;
           margin: 1em 0;
         }
-        .prose pre code {
+        .preview pre code {
           background-color: transparent;
           padding: 0;
           color: inherit;
         }
-        .prose a {
+        .preview a {
           color: #3b82f6;
           text-decoration: underline;
         }
-        .prose a:hover {
+        .preview a:hover {
           color: #1d4ed8;
         }
-        .prose strong {
+        .preview strong {
           font-weight: bold;
         }
-        .prose em {
+        .preview em {
           font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+          .app > div > div {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </div>

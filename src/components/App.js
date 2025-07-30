@@ -93,7 +93,7 @@ function hello() {
               <h2 className="text-lg font-semibold">Markdown Input</h2>
             </div>
             <textarea
-              className="textarea w-full h-full p-4 border-none outline-none resize-none font-mono text-sm leading-relaxed"
+              className="w-full h-full p-4 border-none outline-none resize-none font-mono text-sm leading-relaxed"
               value={markdownText}
               onChange={handleInputChange}
               placeholder="Start typing your markdown here..."
